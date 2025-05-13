@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../cuisines/cuisines_page.dart';
 
 class ResponsiveScaffold extends StatefulWidget {
   const ResponsiveScaffold({Key? key}) : super(key: key);
@@ -70,7 +71,6 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   }
 }
 
-import '../cuisines/cuisines_page.dart';
 
 class PlaceholderWidget extends StatelessWidget {
   final String title;

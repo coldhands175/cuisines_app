@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'features/navigation/responsive_scaffold.dart';
+import 'features/cuisines/providers/recipe_provider.dart';
 
 void main() {
   runApp(const CuisinesApp());
@@ -10,7 +12,11 @@ class CuisinesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RecipeProvider()),
+      ],
+      child: MaterialApp(
       title: 'Cuisines',
       theme: ThemeData(
         brightness: Brightness.light,
@@ -58,6 +64,7 @@ class CuisinesApp extends StatelessWidget {
       ),
       home: const ResponsiveScaffold(),
       debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

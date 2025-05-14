@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../cuisines/cuisines_page.dart';
+import '../cuisines/cuisines_screen.dart';
+import '../recipes/recipes_screen.dart';
 
 class ResponsiveScaffold extends StatefulWidget {
   const ResponsiveScaffold({Key? key}) : super(key: key);
@@ -12,8 +13,8 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
   int _selectedIndex = 0;
 
   static final List<Widget> _pages = <Widget>[
-    const CuisinesPage(),
-    const PlaceholderWidget('Recipes'),
+    const CuisinesScreen(),
+    const RecipesScreen(),
     const PlaceholderWidget('Restaurants'),
     const PlaceholderWidget('Community'),
     const PlaceholderWidget('Saved'),

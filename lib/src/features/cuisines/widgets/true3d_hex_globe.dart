@@ -228,6 +228,20 @@ class _True3DHexGlobeState extends State<True3DHexGlobe>
     super.dispose();
   }
 
+  // Convert latitude and longitude to 3D point
+  Vector3 _lonLatTo3D(double lon, double lat) {
+    // Convert from degrees to radians
+    final phi = (90 - lat) * (math.pi / 180);
+    final theta = (lon + 180) * (math.pi / 180);
+    
+    // Convert from spherical to cartesian coordinates
+    final x = -math.sin(phi) * math.cos(theta);
+    final y = math.cos(phi);
+    final z = math.sin(phi) * math.sin(theta);
+    
+    return Vector3(x, y, z);
+  }
+  
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -749,11 +763,14 @@ class True3DHexGridPainter extends CustomPainter {
               hexagonSize *= pulseScale;
             }
             
+            // Create variable for screen point, potentially modified by animations
+            Offset finalScreenPoint = screenPoint;
+            
             // Apply bounce animation for active or hovered region
             if (bounceProgress > 0 && region == activeRegion) {
               // Apply elastic bounce effect
               final bounceOffset = math.sin(bounceProgress * math.pi * 3) * (1.0 - bounceProgress) * 8.0;
-              screenPoint = Offset(
+              finalScreenPoint = Offset(
                 screenPoint.dx,
                 screenPoint.dy - bounceOffset,
               );
@@ -764,7 +781,7 @@ class True3DHexGridPainter extends CustomPainter {
             
             // Add to the list with z-ordering
             continentPoints.add(_RegionHexPoint(
-              screenPoint,
+              finalScreenPoint,
               region,
               rotatedPoint.z,
               hexagonSize,
